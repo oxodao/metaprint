@@ -7,7 +7,7 @@ datetime:
 
 ram:
   i3:
-    format: "%percentage%%"
+    format: "%percentage%"
     unit: Go
     rounding: 2
   tmux:

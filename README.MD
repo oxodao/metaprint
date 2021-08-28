@@ -1,0 +1,89 @@
+# Metaprint
+
+Metaprint is a tool that lets you give up on your custom scripts to display your computer infos on softwares like i3 / tmux
+
+## Usage
+
+First, you need to create a config file. It should be located at $HOME/.config/metaprint/config.yml. To find out how module works, checkout the [config reference](#Config)
+
+Then you can call them with the following command:
+
+```sh
+$ metaprint <module> <name> [custom args]
+# Example:
+$ metaprint date tmux
+```
+
+## Config
+
+There are not much modules for now, but more will come soon.
+
+Each module can take a prefix and a suffix:
+```yml
+module_name:
+    prefix: 
+    suffix: Go
+```
+
+### Date
+The date module takes a golang date format
+```yml
+datetime:
+  your_custom_name:
+    prefix: 
+    format: 01/02/06 <b>15:04:05</b>
+```
+
+### Ram
+The ram module takes a format, a unit and the amount of number after the comma to display.
+
+The format can take multiple params: `%used%`, `%free%`, `%total%`, `%percentage%`, `%percentage_free%`.
+
+The unit can be either `Go`, `Mo`, `Ko`
+
+```yml
+ram:
+  your_custom_name:
+    format: "%used% / %total% %unit%"
+    unit: Go
+    rounding: 2
+```
+
+### IP
+The IP module lets you display a local IP address.
+
+It takes an interface array which will be scanned in the same order. As of today, it only supports IPv4. IPv6 support may be coming later (PR are welcome ;)).
+
+It also takes a `no_ip` string that is displayed when no address IP can be found.
+
+```yml
+ip:
+  your_custom_name:
+    interface: ['enp37s0']
+    no_ip: No address
+```
+
+### Full config example
+```yml
+datetime:
+  i3:
+    prefix: 
+    format: 01/02/06 <b>15:04:05</b>
+  tmux:
+    format: 15:04:05
+
+ram:
+  i3:
+    format: "%percentage%"
+    unit: Go
+    rounding: 2
+  tmux:
+    format: "%used% / %total% %unit% - %free%"
+    unit: Go
+    rounding: 2
+
+ip:
+  tmux:
+    interface: ['enp37s0']
+    no_ip: No address
+```
