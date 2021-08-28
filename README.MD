@@ -59,7 +59,7 @@ ram:
 ### IP
 The IP module lets you display a local IP address.
 
-It takes an interface array which will be scanned in the same order. As of today, it only supports IPv4. IPv6 support may be coming later (PR are welcome ;)).
+It takes an interface array which will be scanned in the same order. As of today, it only supports IPv4. IPv6 support may be coming later (PR are welcome ;)). This will also ignore non-existing interface, so if you want to put first your Android's RNDIS it won't mess your setup when you are not connected through your smartphone.
 
 It also takes a `no_ip` string that is displayed when no address IP can be found.
 
@@ -131,3 +131,13 @@ custom:
     prefix: ☁️
     command: curl wttr.in/Paris?format=%t
 ```
+
+### Future plans
+This project is open for contribution. If you know Go you can definetly create your own module and submit a PR !
+
+Here are the upcoming features:
+- include / multiple config file
+- Temperature sensors module
+
+Could happen in the future:
+- Weather module
