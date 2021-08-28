@@ -19,3 +19,9 @@ ip:
   tmux:
     interface: ['enp37s0']
     no_ip: No address
+
+music:
+  tmux:
+    format: "%xesam:title% - %xesam:artist%"
+    no_player: None
+    trim_at: 15 

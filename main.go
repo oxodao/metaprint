@@ -3,8 +3,18 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/oxodao/metaprint/config"
+	"github.com/oxodao/metaprint/modules"
+)
+
+const (
+	AUTHOR        = "Oxodao"
+	VERSION       = "0.1"
+	SOFTWARE_NAME = "metaprint"
+
+	DEBUG = false
 )
 
 func main() {
@@ -13,30 +23,40 @@ func main() {
 		panic(err)
 	}
 
-	os.Exit(startReal(cfg))
-}
+	if DEBUG {
+		os.Exit(startDebug(cfg))
+	}
 
-func startReal(cfg *config.Config) int {
 	if len(os.Args) < 3 {
 		printUsage()
-		return 1
+		os.Exit(1)
 	}
 
-	// @TODO: Make golang do something ok there
-	// @TODO: Handle error message when module name is not found
+	// @TODO: Make this not ugly, like find something to put modules in map but make things work correctly and iterate on it
+	// => This could also be used to autogenerate the printUsage thing
+	var module modules.Module = nil
+	var ok bool = false
+
 	switch os.Args[1] {
 	case "date":
-		module := cfg.DateTime[os.Args[2]]
-		printResponse(module.Prefix, module.Print(os.Args[3:]), module.Suffix)
+		module, ok = cfg.DateTime[os.Args[2]]
 	case "ram":
-		module := cfg.Ram[os.Args[2]]
-		printResponse(module.Prefix, module.Print(os.Args[3:]), module.Suffix)
+		module, ok = cfg.Ram[os.Args[2]]
 	case "ip":
-		module := cfg.Ip[os.Args[2]]
-		printResponse(module.Prefix, module.Print(os.Args[3:]), module.Suffix)
+		module, ok = cfg.Ip[os.Args[2]]
+	case "music":
+		module, ok = cfg.Music[os.Args[2]]
+	default:
+		printUsage()
+		os.Exit(1)
 	}
 
-	return 0
+	if !ok {
+		fmt.Printf("Could not find the %v module named \"%v\" !\n", strings.ToLower(os.Args[1]), os.Args[2])
+		os.Exit(1)
+	}
+
+	printResponse(module)
 }
 
 func printUsage() {
@@ -44,23 +64,26 @@ func printUsage() {
 	fmt.Println()
 	fmt.Println("Available modules: ")
 	fmt.Println("\t- date")
-	fmt.Println("\t- ram")
 	fmt.Println("\t- ip")
+	fmt.Println("\t- music")
+	fmt.Println("\t- ram")
 }
 
-func printResponse(prefix, text, suffix string) {
-	if len(prefix) > 0 {
-		prefix += " "
+func printResponse(module modules.Module) {
+	text := module.Print(os.Args[3:])
+
+	if len(module.GetPrefix()) > 0 {
+		text = module.GetPrefix() + " " + text
 	}
 
-	if len(suffix) > 0 {
-		suffix = " " + suffix
+	if len(module.GetSuffix()) > 0 {
+		text += " " + module.GetSuffix()
 	}
 
-	fmt.Println(prefix + text + suffix)
+	fmt.Println(text)
 }
 
-func startDebug(cfg *config.Config) {
+func startDebug(cfg *config.Config) int {
 	fmt.Println("Date")
 	for k, v := range cfg.DateTime {
 		fmt.Println("\t" + k)
@@ -82,4 +105,14 @@ func startDebug(cfg *config.Config) {
 		fmt.Println("\t" + k)
 		fmt.Println("\t\t" + v.Print([]string{}))
 	}
+
+	fmt.Println()
+
+	fmt.Println("Music")
+	for k, v := range cfg.Music {
+		fmt.Println("\t" + k)
+		fmt.Println("\t\t" + v.Print([]string{}))
+	}
+
+	return 0
 }
