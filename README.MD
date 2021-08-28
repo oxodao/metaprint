@@ -3,6 +3,9 @@
 Metaprint is a tool that lets you give up on your custom scripts to display your computer infos on softwares like i3 / tmux
 
 ## Installing
+Just download the latest release in the Github release tab and move it to /usr/bin/metaprint
+
+## Building
 Building this requires Golang installed (I'm using 1.16 but I think anything > 1.13 should work, not tried it though).
 
 ```sh
@@ -136,9 +139,10 @@ custom:
 This project is open for contribution. If you know Go you can definetly create your own module and submit a PR !
 
 Here are the upcoming features:
-- include / multiple config file
+- include / multiple config file / Including files based on the machine hostname
 - CPU usage
 - Temperature sensors module
+- Battery usage / charging / capacity / etc...
 
 Could happen in the future:
 - Weather module
