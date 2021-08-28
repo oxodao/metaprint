@@ -46,6 +46,8 @@ func main() {
 		module, ok = cfg.Ip[os.Args[2]]
 	case "music":
 		module, ok = cfg.Music[os.Args[2]]
+	case "custom":
+		module, ok = cfg.Custom[os.Args[2]]
 	default:
 		printUsage()
 		os.Exit(1)

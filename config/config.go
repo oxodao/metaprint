@@ -9,6 +9,7 @@ import (
 )
 
 type Config struct {
+	Custom   map[string]modules.Custom
 	DateTime map[string]modules.Date
 	Ram      map[string]modules.Ram
 	Ip       map[string]modules.IP
