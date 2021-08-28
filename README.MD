@@ -2,6 +2,13 @@
 
 Metaprint is a tool that lets you give up on your custom scripts to display your computer infos on softwares like i3 / tmux
 
+## Installing
+Building this requires Golang installed (I'm using 1.16 but I think anything > 1.13 should work, not tried it though).
+
+```sh
+$ make install
+```
+
 ## Usage
 
 First, you need to create a config file. It should be located at $HOME/.config/metaprint/config.yml. To find out how module works, checkout the [config reference](#Config)
