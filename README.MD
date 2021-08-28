@@ -137,6 +137,7 @@ This project is open for contribution. If you know Go you can definetly create y
 
 Here are the upcoming features:
 - include / multiple config file
+- CPU usage
 - Temperature sensors module
 
 Could happen in the future:
