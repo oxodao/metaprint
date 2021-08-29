@@ -15,6 +15,7 @@ type Config struct {
 	Ram      map[string]modules.Ram
 	Ip       map[string]modules.IP
 	Music    map[string]modules.Music
+	Uptime   map[string]modules.Uptime
 }
 
 // Load the configuration struct from a json file

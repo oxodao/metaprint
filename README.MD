@@ -36,6 +36,15 @@ module_name:
     suffix: Go
 ```
 
+### Module list
+- [Battery](#battery)
+- [Date](#date)
+- [Ram](#ram)
+- [IP](#ip)
+- [Music](#music)
+- [Uptime](#uptime)
+- [Custom](#custom)
+
 ### Battery
 Available variables for the format: 
   - `%percentage%`: The battery percentage
@@ -105,6 +114,23 @@ music:
     trim_at: 15 # each variable will be trimmed at 15 chars
     trim_all: 50 # the max response (excluding pre/suffix) will be 50 chars
 ```
+
+### Uptime
+This lets you display your uptime.
+Available variables for the format:
+  - `%hours%`
+  - `%minutes%`
+  - `%seconds%`
+
+```yml
+uptime:
+  your_custom_name:
+    two_digit_hours: true # Hours < 10 should have a leading zero
+    format: "%hours%h%minutes%"
+    no_hours_format: "%minutes% minutes"
+    no_minutes_format: "%seconds% seconds"
+```
+
 ### Custom
 This one aims at adding the custom script we promised to remove. Yeah... If there is no module for what you want, you can keep the advantage of using metaprint to run a script, letting it adding prefix/suffix and still use metaprint everywhere instead of calling directly your script
 
@@ -136,7 +162,7 @@ ram:
     unit: Go
     rounding: 2
   tmux:
-    format: "%used% / %total% %unit% - %free%"
+    format: "%used% / %total% %unit%"
     unit: Go
     rounding: 2
 
@@ -150,6 +176,13 @@ music:
     format: "%xesam:title% - %xesam:artist%"
     no_player: none
     trim_at: 15 
+
+uptime:
+  tmux:
+    two_digit_hours: true
+    format: "%hours%h%minutes%"
+    no_hours_format: "%minutes% minutes"
+    no_minutes_format: "%seconds% seconds"
 
 custom:
   my_custom_script:
@@ -168,6 +201,8 @@ Here are the upcoming features:
 - Percentage stats should have multiple prefix (like for battery percentage, changing the icon)
 - Volume (Input / Output)
 - Screen brightness
+- pacman available updates
+- storage infos (free space on X partition, ...)
 
 Could happen in the future:
 - Weather module
