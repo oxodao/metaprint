@@ -3,8 +3,8 @@ package modules
 import (
 	"strings"
 
+	linuxproc "github.com/c9s/goprocinfo/linux"
 	"github.com/oxodao/metaprint/utils"
-	"github.com/pbnjay/memory"
 )
 
 type Ram struct {
@@ -16,31 +16,37 @@ type Ram struct {
 }
 
 func (r Ram) Print(args []string) string {
-	str := r.Format
+	mem, err := linuxproc.ReadMemInfo("/proc/meminfo")
+	if err != nil {
+		return "-"
+	}
 
-	free := float64(memory.FreeMemory())
-	total := float64(memory.TotalMemory())
-	used := total - free
-	percentage := used / total * 100
-	percentageFree := free / total * 100
+	available := float64(mem.MemAvailable)
+	total := float64(mem.MemTotal)
+	used := total - available
+
+	percentage := used / total
+	percentageFree := available / total
 
 	var divisor float64 = 1
 
 	switch strings.ToLower(r.Unit) {
 	case "go":
-		divisor = 1000000000
-	case "mo":
 		divisor = 1000000
-	case "ko":
+	case "mo":
 		divisor = 1000
+	case "ko":
+		divisor = 1
 	}
 
-	free /= divisor
+	available /= divisor
 	total /= divisor
 	used /= divisor
 
+	str := r.Format
+
 	str = strings.ReplaceAll(str, "%used%", utils.GetRoundedFloat(used, r.Rounding))
-	str = strings.ReplaceAll(str, "%free%", utils.GetRoundedFloat(free, r.Rounding))
+	str = strings.ReplaceAll(str, "%free%", utils.GetRoundedFloat(available, r.Rounding))
 	str = strings.ReplaceAll(str, "%total%", utils.GetRoundedFloat(total, r.Rounding))
 	str = strings.ReplaceAll(str, "%percentage%", utils.GetRoundedFloat(percentage, r.Rounding))
 	str = strings.ReplaceAll(str, "%percentage_free%", utils.GetRoundedFloat(percentageFree, r.Rounding))
