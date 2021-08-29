@@ -1,10 +1,9 @@
 package modules
 
 import (
-	"fmt"
-	"strconv"
 	"strings"
 
+	"github.com/oxodao/metaprint/utils"
 	"github.com/pbnjay/memory"
 )
 
@@ -14,14 +13,6 @@ type Ram struct {
 	Format   string
 	Rounding int
 	Unit     string
-}
-
-func ramReplaceVar(input string, toReplace string, with float64, rounding int) string {
-	return strings.ReplaceAll(
-		input,
-		toReplace,
-		fmt.Sprintf("%."+strconv.Itoa(rounding)+"f", with),
-	)
 }
 
 func (r Ram) Print(args []string) string {
@@ -48,11 +39,11 @@ func (r Ram) Print(args []string) string {
 	total /= divisor
 	used /= divisor
 
-	str = ramReplaceVar(str, "%used%", used, r.Rounding)
-	str = ramReplaceVar(str, "%free%", free, r.Rounding)
-	str = ramReplaceVar(str, "%total%", total, r.Rounding)
-	str = ramReplaceVar(str, "%percentage%", percentage, r.Rounding)
-	str = ramReplaceVar(str, "%percentage_free%", percentageFree, r.Rounding)
+	str = strings.ReplaceAll(str, "%used%", utils.GetRoundedFloat(used, r.Rounding))
+	str = strings.ReplaceAll(str, "%free%", utils.GetRoundedFloat(free, r.Rounding))
+	str = strings.ReplaceAll(str, "%total%", utils.GetRoundedFloat(total, r.Rounding))
+	str = strings.ReplaceAll(str, "%percentage%", utils.GetRoundedFloat(percentage, r.Rounding))
+	str = strings.ReplaceAll(str, "%percentage_free%", utils.GetRoundedFloat(percentageFree, r.Rounding))
 
 	str = strings.ReplaceAll(str, "%unit%", r.Unit)
 

@@ -9,6 +9,7 @@ import (
 )
 
 type Config struct {
+	Battery  map[string]modules.Battery
 	Custom   map[string]modules.Custom
 	DateTime map[string]modules.Date
 	Ram      map[string]modules.Ram

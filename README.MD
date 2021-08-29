@@ -31,8 +31,24 @@ There are not much modules for now, but more will come soon.
 Each module can take a prefix and a suffix:
 ```yml
 module_name:
+  your_custom_name:
     prefix: 
     suffix: Go
+```
+
+### Battery
+Available variables for the format: 
+  - `%percentage%`: The battery percentage
+  - `%status_text%`: charging_text or discharging_text from the config
+  - `%cycles%`: The amount of cycles of the battery
+
+```yml
+battery:
+  your_custom_name:
+    battery_name: BAT0 # Defaults to BAT0, found at /sys/class/power_supply/ 
+    charging_text: 🔌
+    discharging_text: 🔋
+    format: "%status_text% %percentage%%"
 ```
 
 ### Date
@@ -101,6 +117,12 @@ custom:
 
 ### Full config example
 ```yml
+battery:
+  i3:
+    charging_text: 🔌
+    discharging_text: 🔋
+    format: "%status_text% %percentage%%"
+
 datetime:
   i3:
     prefix: 
@@ -140,9 +162,12 @@ This project is open for contribution. If you know Go you can definetly create y
 
 Here are the upcoming features:
 - include / multiple config file / Including files based on the machine hostname
+- fixing the ram (currently used = used + shared + temp/cache or IDK something like that)
 - CPU usage
 - Temperature sensors module
-- Battery usage / charging / capacity / etc...
+- Percentage stats should have multiple prefix (like for battery percentage, changing the icon)
+- Volume (Input / Output)
+- Screen brightness
 
 Could happen in the future:
 - Weather module

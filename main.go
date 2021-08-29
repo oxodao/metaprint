@@ -38,6 +38,8 @@ func main() {
 	var ok bool = false
 
 	switch os.Args[1] {
+	case "battery":
+		module, ok = cfg.Battery[os.Args[2]]
 	case "date":
 		module, ok = cfg.DateTime[os.Args[2]]
 	case "ram":
