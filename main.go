@@ -16,10 +16,7 @@ const (
 )
 
 func main() {
-	cfg, err := config.Load()
-	if err != nil {
-		panic(err)
-	}
+	cfg := config.Load()
 
 	if len(os.Args) < 3 {
 		printUsage()

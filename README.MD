@@ -14,7 +14,11 @@ $ make install
 
 ## Usage
 
-First, you need to create a config file. It should be located at $HOME/.config/metaprint/config.yml. To find out how module works, checkout the [config reference](#Config)
+First, you need to create a config file. It should be located at `$HOME/.config/metaprint/config.yml`.
+
+You can also use the config located at `$HOME/.config/metaprint/$HOSTNAME.yml` if you have multiple computers and you want different setup on each.
+
+To find out how module works, checkout the [config reference](#Config)
 
 Then you can call them with the following command:
 
@@ -194,7 +198,6 @@ custom:
 This project is open for contribution. If you know Go you can definetly create your own module and submit a PR !
 
 Here are the upcoming features:
-- include / multiple config file / Including files based on the machine hostname
 - fixing the ram (currently used = used + shared + temp/cache or IDK something like that)
 - CPU usage
 - Temperature sensors module
