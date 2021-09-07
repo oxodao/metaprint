@@ -39,6 +39,8 @@ func main() {
 		module, ok = cfg.Ip[os.Args[2]]
 	case "music":
 		module, ok = cfg.Music[os.Args[2]]
+	case "storage":
+		module, ok = cfg.Storage[os.Args[2]]
 	case "uptime":
 		module, ok = cfg.Uptime[os.Args[2]]
 	case "custom":
@@ -75,6 +77,7 @@ func printUsage() {
 	fmt.Println("\t- ip")
 	fmt.Println("\t- music")
 	fmt.Println("\t- ram")
+	fmt.Println("\t- storage")
 	fmt.Println("\t- uptime")
 	fmt.Println("\t- custom")
 }

@@ -16,6 +16,7 @@ type Config struct {
 	Ram      map[string]modules.Ram
 	Ip       map[string]modules.IP
 	Music    map[string]modules.Music
+	Storage  map[string]modules.Storage
 	Uptime   map[string]modules.Uptime
 }
 

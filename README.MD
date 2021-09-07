@@ -30,7 +30,7 @@ $ metaprint date tmux
 
 ## Config
 
-There are not much modules for now, but more will come soon.
+There are not many modules for now, but more will come soon.
 
 Each module can take a prefix and a suffix:
 ```yml
@@ -103,7 +103,7 @@ ip:
 ```
 
 ### Music
-The music module accesses the mpris data through dbus so you need a mpris compatible player to go with this (Most of them are: Firefox, Spotify, VLC, ...)
+The music module accesses the mpris data through dbus, so you need a mpris compatible player to go with this (Most of them are: Firefox, Spotify, VLC, ...)
 
 You can limit / order the players allowed the same way you'd do with the IP module, the string required is (@TODO: Find on what I sort and explain how to get it here).
 
@@ -117,6 +117,26 @@ music:
     no_player: none # This is the text displayed when there is no player running
     trim_at: 15 # each variable will be trimmed at 15 chars
     trim_all: 50 # the max response (excluding pre/suffix) will be 50 chars
+```
+
+### Storage
+The storage module lets you display your storage infos.
+
+You need to set the `mount_point` value to the mount point of your device.
+
+The format can take multiple params: `%free%`, `%used%`, `%total`.
+
+The unit can be either `Gb`, `Mb`, `Kb`, `b`
+
+You can also set the rounding.
+
+```yml
+storage:
+  tmux:
+    format: "%free% / %total% Gb"
+    rounding: 2
+    unit: Gb # Optional, default to Gb
+    mount_point: /
 ```
 
 ### Uptime
@@ -180,6 +200,12 @@ music:
     format: "%xesam:title% - %xesam:artist%"
     no_player: none
     trim_at: 15 
+    
+storage:
+  tmux:
+    format: "%free% / %total% Gb"
+    mount_point: /
+    rounding: 2
 
 uptime:
   tmux:
@@ -195,7 +221,7 @@ custom:
 ```
 
 ### Future plans
-This project is open for contribution. If you know Go you can definetly create your own module and submit a PR !
+This project is open for contribution. If you know Go you can definitely create your own module and submit a PR !
 
 Here are the upcoming features:
 - fixing the ram (currently used = used + shared + temp/cache or IDK something like that)
@@ -209,3 +235,6 @@ Here are the upcoming features:
 
 Could happen in the future:
 - Weather module
+
+Far future, maybe in a parallel universe:
+- Windows / OSX support
