@@ -11,7 +11,7 @@ import (
 
 const (
 	AUTHOR        = "Oxodao"
-	VERSION       = "0.1"
+	VERSION       = "0.2"
 	SOFTWARE_NAME = "metaprint"
 )
 
