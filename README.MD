@@ -231,7 +231,6 @@ Here are the upcoming features:
 - Volume (Input / Output)
 - Screen brightness
 - pacman available updates
-- storage infos (free space on X partition, ...)
 
 Could happen in the future:
 - Weather module
