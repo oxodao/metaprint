@@ -2,10 +2,9 @@ package modules
 
 import (
 	"fmt"
-	"math"
-	"strings"
-
 	linuxproc "github.com/c9s/goprocinfo/linux"
+	"github.com/oxodao/metaprint/utils"
+	"math"
 )
 
 type Uptime struct {
@@ -15,6 +14,16 @@ type Uptime struct {
 	NoMinutesFormat string `yaml:"no_minutes_format"`
 	NoHoursFormat   string `yaml:"no_hours_format"`
 	TwoDigitHours   bool   `yaml:"two_digit_hours"`
+}
+
+func pad(number float64, condition bool) string {
+	padded := fmt.Sprintf("%.0f", number)
+	if condition {
+		if number < 10 {
+			padded = "0" + padded
+		}
+	}
+	return padded
 }
 
 func (u Uptime) Print(args []string) string {
@@ -27,52 +36,21 @@ func (u Uptime) Print(args []string) string {
 	minutes := math.Floor((ut.Total - (hours * 60 * 60)) / 60)
 	seconds := math.Floor(ut.Total - (hours * 60 * 60) - (minutes * 60))
 
-	str := u.Format
+	format := u.Format
 
 	if hours == 0 {
-		str = u.NoHoursFormat
+		format = u.NoHoursFormat
 
 		if minutes == 0 {
-			str = u.NoMinutesFormat
+			format = u.NoMinutesFormat
 		}
 	}
 
-	tmpHours := fmt.Sprintf("%.0f", hours)
-	if u.TwoDigitHours {
-		if hours < 10 {
-			tmpHours = "0" + tmpHours
-		}
-	}
-
-	str = strings.ReplaceAll(
-		str,
-		"%hours%",
-		tmpHours,
-	)
-
-	tmpMinutes := fmt.Sprintf("%.0f", minutes)
-	if minutes < 10 {
-		tmpMinutes = "0" + tmpMinutes
-	}
-
-	str = strings.ReplaceAll(
-		str,
-		"%minutes%",
-		tmpMinutes,
-	)
-
-	tmpSeconds := fmt.Sprintf("%.0f", seconds)
-	if seconds < 10 {
-		tmpSeconds = "0" + tmpSeconds
-	}
-
-	str = strings.ReplaceAll(
-		str,
-		"%seconds%",
-		tmpSeconds,
-	)
-
-	return str
+	return utils.ReplaceVariables(format, map[string]interface{}{
+		"hours": pad(hours, u.TwoDigitHours),
+		"minutes": pad(minutes, true),
+		"seconds": pad(seconds, true),
+	})
 }
 
 func (u Uptime) GetPrefix() string {

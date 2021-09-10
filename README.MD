@@ -44,6 +44,7 @@ module_name:
 - [PulseAudio](wiki/pulseaudio.md)
 - [Ram](wiki/ram.md)
 - [Storage](wiki/storage.md)
+- [Temperature](wiki/temperature.md)
 - [Uptime](wiki/uptime.md)
 - [Custom](wiki/custom.md)
 
@@ -56,7 +57,6 @@ This project is open for contribution. If you know Go you can definitely create 
 Here are the upcoming features:
 - fixing the ram (currently used = used + shared + temp/cache or IDK something like that)
 - CPU usage
-- Temperature sensors module
 - Percentage stats should have multiple prefix (like for battery percentage, changing the icon)
 - Screen brightness
 - pacman available updates

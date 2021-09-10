@@ -43,17 +43,14 @@ func (r Ram) Print(args []string) string {
 	total /= divisor
 	used /= divisor
 
-	str := r.Format
-
-	str = strings.ReplaceAll(str, "%used%", utils.GetRoundedFloat(used, r.Rounding))
-	str = strings.ReplaceAll(str, "%free%", utils.GetRoundedFloat(available, r.Rounding))
-	str = strings.ReplaceAll(str, "%total%", utils.GetRoundedFloat(total, r.Rounding))
-	str = strings.ReplaceAll(str, "%percentage%", utils.GetRoundedFloat(percentage, r.Rounding))
-	str = strings.ReplaceAll(str, "%percentage_free%", utils.GetRoundedFloat(percentageFree, r.Rounding))
-
-	str = strings.ReplaceAll(str, "%unit%", r.Unit)
-
-	return str
+	return utils.ReplaceVariables(r.Format, map[string]interface{}{
+		"used": utils.GetRoundedFloat(used, r.Rounding),
+		"free": utils.GetRoundedFloat(available, r.Rounding),
+		"total": utils.GetRoundedFloat(total, r.Rounding),
+		"percentage": utils.GetRoundedFloat(percentage, r.Rounding),
+		"percentage_free": utils.GetRoundedFloat(percentageFree, r.Rounding),
+		"unit": r.Unit,
+	})
 }
 
 func (r Ram) GetPrefix() string {

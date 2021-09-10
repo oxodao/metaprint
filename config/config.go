@@ -12,15 +12,16 @@ import (
 )
 
 type Config struct {
-	Battery    map[string]modules.Battery    `yaml:"battery"`
-	Custom     map[string]modules.Custom     `yaml:"custom"`
-	DateTime   map[string]modules.Date       `yaml:"datetime"`
-	Ip         map[string]modules.IP         `yaml:"ip"`
-	Music      map[string]modules.Music      `yaml:"music"`
-	PulseAudio map[string]modules.PulseAudio `yaml:"pulseaudio"`
-	Ram        map[string]modules.Ram        `yaml:"ram"`
-	Storage    map[string]modules.Storage    `yaml:"storage"`
-	Uptime     map[string]modules.Uptime     `yaml:"uptime"`
+	Battery     map[string]modules.Battery     `yaml:"battery"`
+	Custom      map[string]modules.Custom      `yaml:"custom"`
+	DateTime    map[string]modules.Date        `yaml:"datetime"`
+	Ip          map[string]modules.IP          `yaml:"ip"`
+	Music       map[string]modules.Music       `yaml:"music"`
+	PulseAudio  map[string]modules.PulseAudio  `yaml:"pulseaudio"`
+	Ram         map[string]modules.Ram         `yaml:"ram"`
+	Storage     map[string]modules.Storage     `yaml:"storage"`
+	Temperature map[string]modules.Temperature `yaml:"temperature"`
+	Uptime      map[string]modules.Uptime      `yaml:"uptime"`
 }
 
 func GetModulesAvailable() []string {
