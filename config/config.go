@@ -1,24 +1,68 @@
 package config
 
 import (
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
+	"reflect"
 
 	"github.com/oxodao/metaprint/modules"
 	"gopkg.in/yaml.v2"
 )
 
 type Config struct {
-	Battery    map[string]modules.Battery
-	Custom     map[string]modules.Custom
-	DateTime   map[string]modules.Date
-	Ram        map[string]modules.Ram
-	Ip         map[string]modules.IP
-	Music      map[string]modules.Music
+	Battery    map[string]modules.Battery    `yaml:"battery"`
+	Custom     map[string]modules.Custom     `yaml:"custom"`
+	DateTime   map[string]modules.Date       `yaml:"datetime"`
+	Ip         map[string]modules.IP         `yaml:"ip"`
+	Music      map[string]modules.Music      `yaml:"music"`
 	PulseAudio map[string]modules.PulseAudio `yaml:"pulseaudio"`
-	Storage    map[string]modules.Storage
-	Uptime     map[string]modules.Uptime
+	Ram        map[string]modules.Ram        `yaml:"ram"`
+	Storage    map[string]modules.Storage    `yaml:"storage"`
+	Uptime     map[string]modules.Uptime     `yaml:"uptime"`
+}
+
+func GetModulesAvailable() []string {
+	modulesAvailable := []string{}
+
+	t := reflect.TypeOf(Config{})
+	for i := 0; i < t.NumField(); i++ {
+		field := t.Field(i)
+		modulesAvailable = append(modulesAvailable, field.Tag.Get("yaml"))
+	}
+
+	return modulesAvailable
+}
+
+func getFieldNameFromModuleName(moduleType string) string {
+	t := reflect.TypeOf(Config{})
+	for i := 0; i < t.NumField(); i++ {
+		field := t.Field(i)
+		if field.Tag.Get("yaml") == moduleType {
+			return field.Name
+		}
+	}
+
+	return ""
+}
+
+func (c Config) FindModule(moduleType, name string) (modules.Module, error) {
+	fieldName := getFieldNameFromModuleName(moduleType)
+	if len(fieldName) == 0 {
+		return nil, nil
+	}
+
+	t := reflect.ValueOf(c)
+	value := t.FieldByName(fieldName).MapIndex(reflect.ValueOf(name))
+
+	if value.Kind() == reflect.Invalid {
+		return nil, errors.New("could not find the " + fieldName + " module named " + name)
+	}
+
+	module := value.Interface().(modules.Module)
+
+	return module, nil
 }
 
 // Load the configuration struct from a json file

@@ -24,7 +24,7 @@ Then you can call them with the following command:
 ```sh
 $ metaprint <module> <name> [custom args]
 # Example:
-$ metaprint date tmux
+$ metaprint datetime tmux
 ```
 
 ## Config
