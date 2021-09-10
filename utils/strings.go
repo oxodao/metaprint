@@ -29,3 +29,11 @@ func GetInUnit(val float64, unit string) float64 {
 
 	return val
 }
+
+func ReplaceVariables(str string, variables map[string]interface{}) string {
+	for k, v := range variables {
+		str = strings.ReplaceAll(str, "%" + k + "%", fmt.Sprintf("%v", v))
+	}
+
+	return str
+}

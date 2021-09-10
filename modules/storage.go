@@ -2,7 +2,6 @@ package modules
 
 import (
 	"github.com/oxodao/metaprint/utils"
-	"strings"
 	"syscall"
 )
 
@@ -40,13 +39,11 @@ func (s Storage) Print(args []string) string {
 	availStr := utils.GetRoundedFloat(avail, s.Rounding)
 	usedStr := utils.GetRoundedFloat(used, s.Rounding)
 
-	str := s.Format
-
-	str = strings.ReplaceAll(str, "%free%", availStr)
-	str = strings.ReplaceAll(str, "%used%", usedStr)
-	str = strings.ReplaceAll(str, "%total%", sizeStr)
-
-	return str
+	return utils.ReplaceVariables(s.Format, map[string]interface{}{
+		"free": availStr,
+		"used": usedStr,
+		"total": sizeStr,
+	})
 }
 
 func (s Storage) GetPrefix() string {

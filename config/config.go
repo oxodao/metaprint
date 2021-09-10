@@ -10,14 +10,15 @@ import (
 )
 
 type Config struct {
-	Battery  map[string]modules.Battery
-	Custom   map[string]modules.Custom
-	DateTime map[string]modules.Date
-	Ram      map[string]modules.Ram
-	Ip       map[string]modules.IP
-	Music    map[string]modules.Music
-	Storage  map[string]modules.Storage
-	Uptime   map[string]modules.Uptime
+	Battery    map[string]modules.Battery
+	Custom     map[string]modules.Custom
+	DateTime   map[string]modules.Date
+	Ram        map[string]modules.Ram
+	Ip         map[string]modules.IP
+	Music      map[string]modules.Music
+	PulseAudio map[string]modules.PulseAudio `yaml:"pulseaudio"`
+	Storage    map[string]modules.Storage
+	Uptime     map[string]modules.Uptime
 }
 
 // Load the configuration struct from a json file

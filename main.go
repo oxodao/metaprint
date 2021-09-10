@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"strings"
-
 	"github.com/oxodao/metaprint/config"
 	"github.com/oxodao/metaprint/modules"
+	"github.com/oxodao/metaprint/pulse"
+	"os"
+	"strings"
 )
 
 const (
@@ -15,12 +15,26 @@ const (
 	SOFTWARE_NAME = "metaprint"
 )
 
+var otherCommands = []string{"pulseaudio-infos"}
+
 func main() {
 	cfg := config.Load()
 
-	if len(os.Args) < 3 {
+	hasOtherCommands := hasOtherCommand()
+	if len(os.Args) < 3 && !hasOtherCommands {
 		printUsage()
 		os.Exit(1)
+	}
+
+	if hasOtherCommands {
+		switch os.Args[1] {
+		case "pulseaudio-infos":
+			pulse.PrintInfos()
+		default:
+			printUsage()
+			os.Exit(1)
+		}
+		return
 	}
 
 	// @TODO: Make this not ugly, like find something to put modules in map but make things work correctly and iterate on it
@@ -39,6 +53,8 @@ func main() {
 		module, ok = cfg.Ip[os.Args[2]]
 	case "music":
 		module, ok = cfg.Music[os.Args[2]]
+	case "pulseaudio":
+		module, ok = cfg.PulseAudio[os.Args[2]]
 	case "storage":
 		module, ok = cfg.Storage[os.Args[2]]
 	case "uptime":
@@ -70,14 +86,35 @@ func main() {
 
 func printUsage() {
 	fmt.Println("Usage: metaprint <module> <name> [params]")
+	fmt.Println("       metaprint other-command")
+	fmt.Println()
+	fmt.Println("Other commands: ")
+	for _, cmd := range otherCommands {
+		fmt.Println("\t- " + cmd)
+	}
 	fmt.Println()
 	fmt.Println("Available modules: ")
 	fmt.Println("\t- battery")
 	fmt.Println("\t- date")
 	fmt.Println("\t- ip")
 	fmt.Println("\t- music")
+	fmt.Println("\t- pulseaudio")
 	fmt.Println("\t- ram")
 	fmt.Println("\t- storage")
 	fmt.Println("\t- uptime")
 	fmt.Println("\t- custom")
+}
+
+func hasOtherCommand() bool {
+	if len(os.Args) != 2 {
+		return false
+	}
+
+	for _, val := range otherCommands {
+		if os.Args[1] == val {
+			return true
+		}
+	}
+
+	return false
 }
