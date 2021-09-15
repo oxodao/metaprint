@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os/exec"
 
+	"github.com/oxodao/metaprint/utils"
 	"github.com/oliveagle/jsonpath"
 )
 
@@ -12,6 +13,7 @@ type Temperature struct {
 	Prefix string
 	Suffix string
 
+	Rounding int
 	JsonPath string `yaml:"json_path"`
 }
 
@@ -30,6 +32,10 @@ func (t Temperature) Print(args []string) string {
 	res, err := jsonpath.JsonPathLookup(sensorsData, t.JsonPath)
 	if err != nil {
 		return err.Error()
+	}
+
+	if val, ok := res.(float64); ok {
+		return fmt.Sprintf("%v", utils.GetRoundedFloat(val, t.Rounding))
 	}
 
 	return fmt.Sprintf("%v", res)
