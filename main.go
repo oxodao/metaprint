@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/oxodao/metaprint/config"
 	"github.com/oxodao/metaprint/pulse"
-	"os"
 )
 
 const (

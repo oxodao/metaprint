@@ -59,7 +59,6 @@ Here are the upcoming features:
 - CPU usage
 - Percentage stats should have multiple prefix (like for battery percentage, changing the icon)
 - Screen brightness
-- pacman available updates
 
 Could happen in the future:
 - Weather module

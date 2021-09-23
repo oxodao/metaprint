@@ -51,5 +51,5 @@ temperature:
   i3_gpu:
     prefix: 🔥🖥️
     json_path: $.amdgpu-pci-2600.edge.temp1_input
-    suffix: °C
+    unit: "°C" # Purely for display purposes for now
 ```
