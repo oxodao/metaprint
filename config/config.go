@@ -13,6 +13,7 @@ import (
 
 type Config struct {
 	Battery     map[string]modules.Battery     `yaml:"battery"`
+	Backlight   map[string]modules.Backlight   `yaml:"backlight"`
 	Custom      map[string]modules.Custom      `yaml:"custom"`
 	DateTime    map[string]modules.Date        `yaml:"datetime"`
 	Ip          map[string]modules.IP          `yaml:"ip"`

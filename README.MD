@@ -37,6 +37,7 @@ module_name:
 ```
 
 ### Module list & usage
+- [Backlight](wiki/backlight.md)
 - [Battery](wiki/battery.md)
 - [Date](wiki/date.md)
 - [IP](wiki/ip.md)
@@ -58,7 +59,6 @@ Here are the upcoming features:
 - fixing the ram (currently used = used + shared + temp/cache or IDK something like that)
 - CPU usage
 - Percentage stats should have multiple prefix (like for battery percentage, changing the icon)
-- Screen brightness
 
 Could happen in the future:
 - Weather module
