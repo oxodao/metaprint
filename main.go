@@ -3,18 +3,20 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/oxodao/metaprint/config"
 	"github.com/oxodao/metaprint/pulse"
 )
 
-const (
+var (
 	AUTHOR        = "Oxodao"
-	VERSION       = "0.3"
+	VERSION       = "0.5"
+	COMMIT        = "XXXXXXXXX"
 	SOFTWARE_NAME = "metaprint"
 )
 
-var otherCommands = []string{"pulseaudio-infos"}
+var otherCommands = []string{"pulseaudio-infos", "version"}
 
 func main() {
 	cfg := config.Load()
@@ -29,6 +31,9 @@ func main() {
 		switch os.Args[1] {
 		case "pulseaudio-infos":
 			pulse.PrintInfos()
+		case "version":
+			fmt.Printf("%v v%v (Commit %v) by %v\nhttps://github.com/%v/%v\n", SOFTWARE_NAME, VERSION, COMMIT, AUTHOR, strings.ToLower(AUTHOR), strings.ToLower(SOFTWARE_NAME))
+			os.Exit(1)
 		default:
 			printUsage()
 			os.Exit(1)
