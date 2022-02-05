@@ -11,7 +11,7 @@ import (
 
 var (
 	AUTHOR        = "Oxodao"
-	VERSION       = "0.5"
+	VERSION       = "DEV"
 	COMMIT        = "XXXXXXXXX"
 	SOFTWARE_NAME = "metaprint"
 )
@@ -32,7 +32,7 @@ func main() {
 		case "pulseaudio-infos":
 			pulse.PrintInfos()
 		case "version":
-			fmt.Printf("%v v%v (Commit %v) by %v\nhttps://github.com/%v/%v\n", SOFTWARE_NAME, VERSION, COMMIT, AUTHOR, strings.ToLower(AUTHOR), strings.ToLower(SOFTWARE_NAME))
+			fmt.Printf("%v %v (Commit %v) by %v\nhttps://github.com/%v/%v\n", SOFTWARE_NAME, VERSION, COMMIT, AUTHOR, strings.ToLower(AUTHOR), strings.ToLower(SOFTWARE_NAME))
 			os.Exit(1)
 		default:
 			printUsage()
