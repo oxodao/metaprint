@@ -1,0 +1,20 @@
+name: "Build & publish metaprint release"
+
+on:
+  create:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: '^1.17.5'
+      - run: GOOS=linux GOARCH=amd64 go build -o metaprint-${GITHUB_REF##*/}-x86_64 .
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "metaprint-*-*-*"
+          token: ${{ secrets.GITHUB_TOKEN }}
