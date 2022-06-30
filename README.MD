@@ -3,7 +3,7 @@
 Metaprint is a tool that lets you give up on your custom scripts to display your computer infos on softwares like i3 / tmux
 
 ![tmux status line 80% metaprint](https://user-images.githubusercontent.com/1828125/176643911-3c604abf-55f9-4732-8595-319cdfe48f95.png)
-
+[tmux config for the preview](wiki/tmux_preview.tmux)
 
 ## Installing
 Just download the latest release in the Github release tab and move it to /usr/bin/metaprint
