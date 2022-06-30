@@ -39,7 +39,12 @@ func (s Storage) Print(args []string) string {
 	availStr := utils.GetRoundedFloat(avail, s.Rounding)
 	usedStr := utils.GetRoundedFloat(used, s.Rounding)
 
+    freePctStr := utils.GetRoundedFloat((avail/size)*100.0, s.Rounding)
+    usedPctStr := utils.GetRoundedFloat((used/size)*100.0, s.Rounding)
+
 	return utils.ReplaceVariables(s.Format, map[string]interface{}{
+        "pfree": freePctStr,
+        "pused": usedPctStr,
 		"free": availStr,
 		"used": usedStr,
 		"total": sizeStr,
