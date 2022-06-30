@@ -17,6 +17,16 @@ const (
 	GB = 1024 * MB
 )
 
+func GetSpeedByUnit(val float64, unit string) float64 {
+  if len(unit)==0{
+    unit="pm"
+  }
+  if unit == "pm" {
+    return val*60.0
+  }
+  return val 
+}
+
 func GetInUnit(val float64, unit string) float64 {
 	switch strings.ToLower(unit) {
 	case "kb":

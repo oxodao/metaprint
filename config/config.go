@@ -16,6 +16,10 @@ type Config struct {
 	Backlight   map[string]modules.Backlight   `yaml:"backlight"`
 	Custom      map[string]modules.Custom      `yaml:"custom"`
 	DateTime    map[string]modules.Date        `yaml:"datetime"`
+	HackSpeed   map[string]modules.HackSpeed   `yaml:"hackspeed"`
+	CpuInfo     map[string]modules.CpuInfo     `yaml:"cpuinfo"`
+  CpuUsage    map[string]modules.CpuUsage    `yaml:"cpuusage"`
+	LoadAvg     map[string]modules.LoadAvg     `yaml:"loadavg"`
 	Ip          map[string]modules.IP          `yaml:"ip"`
 	Music       map[string]modules.Music       `yaml:"music"`
 	PulseAudio  map[string]modules.PulseAudio  `yaml:"pulseaudio"`
