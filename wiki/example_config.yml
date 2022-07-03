@@ -1,8 +1,8 @@
 battery:
-  i3:
-    charging_text: 🔌
-    discharging_text: 🔋
-    format: "%status_text% %percentage%%"
+  tmux:
+    charging_text: 
+    discharging_text: 
+    format: "%percentage%%"
 
 datetime:
   i3:
@@ -11,19 +11,38 @@ datetime:
   tmux:
     format: 15:04:05
 
+cpuinfo:
+  tmux:
+    format: " #[bold,fg=colour0]%cpus% #[nobold] #[bold,fg=colour8 dim]%avgghz%㎓"
+    rounding: 2
+cpuusage:
+  tmux:
+    format: " #{p-3:#{l:%pusage%}}%#[bold,fg=colour#{?#{e|<:%pusage%,70},2,1}] "
+    rounding: 0
+    
+loadavg:
+  tmux:
+    format: "龍#{p-5:#{l:%avg1min%}} (ﰌ #{p-3:#{l:%running%}})[	#{p-3:#{l:%procs%}}]"
+    rounding: 2
+    
 ram:
   i3:
     format: "%percentage%"
     unit: Go
     rounding: 2
   tmux:
-    format: "%used% / %total% %unit%"
+    format: " %used%/#[bold]%total%㎇"
     unit: Go
-    rounding: 2
-
+    rounding: 1
+    #  %fakewpm%/fwpm 
+hackspeed:
+  tmux:
+    format: " %keys%/kps וּ %shorties%/s  %wpm%/wpm"
+    unit: ps
+    rounding: 1
 ip:
   tmux:
-    interface: ['enp37s0']
+    interface: ['wlan0']
     no_ip: No address
 
 music:
@@ -44,9 +63,9 @@ pulseaudio:
 
 storage:
   tmux:
-    format: "%free% / %total% Gb"
+    format: "%pused%%"
     mount_point: /
-    rounding: 2
+    rounding: 1
 
 uptime:
   tmux:

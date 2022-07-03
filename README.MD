@@ -2,6 +2,11 @@
 
 Metaprint is a tool that lets you give up on your custom scripts to display your computer infos on softwares like i3 / tmux
 
+![tmux status line 80% metaprint](https://user-images.githubusercontent.com/1828125/176643911-3c604abf-55f9-4732-8595-319cdfe48f95.png)
+[tmux config for the preview](wiki/tmux_preview.tmux)
+
+[metaprint config for the preview](wiki/example_config.yml)
+
 ## Installing
 Just download the latest release in the Github release tab and move it to /usr/bin/metaprint
 
@@ -44,12 +49,14 @@ module_name:
 - [Music](wiki/music.md)
 - [PulseAudio](wiki/pulseaudio.md)
 - [Ram](wiki/ram.md)
+- [Load](wiki/loadavg.md)
+- [CPU Usage](wiki/cpuusage.md)
+- [CPU Info](wiki/cpuinfo.md)
+- [Hackspeed](wiki/hackspeed.md)
 - [Storage](wiki/storage.md)
 - [Temperature](wiki/temperature.md)
 - [Uptime](wiki/uptime.md)
 - [Custom](wiki/custom.md)
-
-
 - [Full config example](wiki/example_config.yml)
 
 ### Future plans
@@ -57,7 +64,7 @@ This project is open for contribution. If you know Go you can definitely create 
 
 Here are the upcoming features:
 - fixing the ram (currently used = used + shared + temp/cache or IDK something like that)
-- CPU usage
+- ~~CPU usage~~
 - Percentage stats should have multiple prefix (like for battery percentage, changing the icon)
 
 Could happen in the future:
